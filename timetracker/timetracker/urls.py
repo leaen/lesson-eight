@@ -16,7 +16,10 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from entries import urls as entry_urls
 
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
     url(r'^', include(entry_urls)),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/login/$', auth_views.login, {'template_name': 'timetracker/login.html'}),
 ]
