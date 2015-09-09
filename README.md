@@ -13,9 +13,9 @@ Check our RESOURCES.md for some links we think you'll find handy.
 
 ## Homework Checklist
 
-- [ ] [Fork this repository][gh-fork]
-- [ ] Clone the repo to your own machine
-- [ ] Use the virtualenv you created in previous lesson
+- [X] [Fork this repository][gh-fork]
+- [X] Clone the repo to your own machine
+- [X] Use the virtualenv you created in previous lesson
 - [ ] Make sure timetracker entries are only accessible by the user that created it
 - [ ] Make sure clients and projects can only be changed by their creator
 - [ ] Deploy your application to Heroku and email a link to [Brenton](brenton@commoncode.com.au).
