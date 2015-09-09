@@ -5,6 +5,7 @@ from django.utils import timezone
 
 class Client(models.Model):
     name = models.CharField(max_length=200)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 
     def __str__(self):
         return self.name
@@ -13,18 +14,18 @@ class Client(models.Model):
 class Project(models.Model):
     client = models.ForeignKey('Client', blank=True, null=True)
     name = models.CharField(max_length=200)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 
     def __str__(self):
         return '<{}> {}'.format(self.client, self.name)
 
 
-# Create your models here.
 class Entry(models.Model):
     start = models.DateTimeField(default=timezone.now)
     stop = models.DateTimeField(blank=True, null=True)
     project = models.ForeignKey('Project')
     description = models.CharField(max_length=200)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 
     class Meta:
         verbose_name_plural = 'entries'
