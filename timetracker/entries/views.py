@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, RedirectView, UpdateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout as auth_logout
 
 from .forms import ClientForm, EntryForm, ProjectForm
 from .models import Client, Entry, Project
@@ -261,3 +262,7 @@ class ClientRedirectView(LoginRequiredMixin, RedirectView):
     # Set redirect non-permanent. We may want to change it later
     permanent = False
     url = reverse_lazy('client-list')
+
+def logout(request):
+    auth_logout(request)
+    return redirect('/')

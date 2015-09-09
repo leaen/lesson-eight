@@ -12,4 +12,5 @@ urlpatterns = [
         name='project-list'),
     url(r'^projects/(?P<pk>\d+)/$', views.ProjectUpdateView.as_view(),
         name='project-detail'),
+    url(r'^logout/$', views.logout, name='logout'),
 ]

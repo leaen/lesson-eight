@@ -37,6 +37,10 @@
             <li><a href="{% url 'client-list' %}">Clients</a></li>
             <li><a href="{% url 'entry-list' %}">Entries</a></li>
             <li><a href="{% url 'project-list' %}">Projects</a></li>
+            {% if user.is_authenticated %}
+                <li><a>Hello {{ user.username }}</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
