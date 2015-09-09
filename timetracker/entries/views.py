@@ -1,10 +1,17 @@
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, RedirectView, UpdateView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from .forms import ClientForm, EntryForm, ProjectForm
 from .models import Client, Entry, Project
 
+class LoginRequiredMixin(object):
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 def clients(request):
     """
@@ -90,7 +97,7 @@ def client_detail(request, pk):
     })
 
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(LoginRequiredMixin, UpdateView):
     """
     CBV version of above "client_detail" view function
     """
@@ -127,7 +134,7 @@ def entries(request):
     })
 
 
-class EntryCreateView(CreateView):
+class EntryCreateView(LoginRequiredMixin, CreateView):
     """
     CBV version of above "entries" view function
     """
@@ -165,7 +172,7 @@ def projects(request):
     })
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(LoginRequiredMixin, CreateView):
     """
     CBV version of above "projects" view function
     """
@@ -208,7 +215,7 @@ def project_detail(request, pk):
     })
 
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     """
     CBV version of above "project_detail" view function
     """
@@ -218,7 +225,7 @@ class ProjectUpdateView(UpdateView):
     success_url = reverse_lazy('project-list')
 
 
-class ClientRedirectView(RedirectView):
+class ClientRedirectView(LoginRequiredMixin, RedirectView):
     # Set redirect non-permanent. We may want to change it later
     permanent = False
     url = reverse_lazy('client-list')
