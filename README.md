@@ -16,8 +16,8 @@ Check our RESOURCES.md for some links we think you'll find handy.
 - [X] [Fork this repository][gh-fork]
 - [X] Clone the repo to your own machine
 - [X] Use the virtualenv you created in previous lesson
-- [ ] Make sure timetracker entries are only accessible by the user that created it
-- [ ] Make sure clients and projects can only be changed by their creator
+- [X] Make sure timetracker entries are only accessible by the user that created it
+- [X] Make sure clients and projects can only be changed by their creator
 - [ ] Deploy your application to Heroku and email a link to [Brenton](brenton@commoncode.com.au).
 - [ ] Bonus: On the project list view, show how much time was spent per project in total and how much time the current user spent
 
