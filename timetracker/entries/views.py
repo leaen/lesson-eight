@@ -68,6 +68,10 @@ class ClientCreateView(CreateView):
     # before the project's URLConf is loaded
     success_url = reverse_lazy('client-list')
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(ClientCreateView, self).form_valid(form)
+
     def get_context_data(self, **kwargs):
         context = super(ClientCreateView, self).get_context_data(**kwargs)
         context['client_list'] = Client.objects.all()
@@ -105,6 +109,11 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ClientForm
     template_name = 'client_detail.html'
     success_url = reverse_lazy('client-list')
+
+    def get_queryset(self):
+        qs = super(ClientUpdateView, self).get_queryset()
+        qs = qs.filter(author=self.request.user)
+        return qs
 
 
 def entries(request):
@@ -148,6 +157,15 @@ class EntryCreateView(LoginRequiredMixin, CreateView):
         context['entry_list'] = Entry.objects.all()
         return context
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(EntryCreateView, self).form_valid(form)
+
+    def get_queryset(self):
+        qs = super(EntryCreateView, self).get_queryset()
+        qs = qs.filter(author=self.request.user)
+        return qs
+
 
 def projects(request):
     """
@@ -186,6 +204,15 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         context['project_list'] = Project.objects.all()
         return context
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(ProjectCreateView, self).form_valid(form)
+
+    def get_queryset(self):
+        qs = super(ProjectCreateView, self).get_queryset()
+        qs = qs.filter(author=self.request.user)
+        return qs
+
 
 def project_detail(request, pk):
     """
@@ -223,6 +250,11 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProjectForm
     template_name = 'project_detail.html'
     success_url = reverse_lazy('project-list')
+
+    def get_queryset(self):
+        qs = super(ProjectUpdateView, self).get_queryset()
+        qs = qs.filter(author=self.request.user)
+        return qs
 
 
 class ClientRedirectView(LoginRequiredMixin, RedirectView):
